@@ -20,12 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:ioc.xml")
 class SpringTCFAppTest {
-	
 	@Autowired
 	private Person person;
 
 	private Person expectedPerson;
-	
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -37,5 +35,4 @@ class SpringTCFAppTest {
 		assertEquals(expectedPerson, person);
 		System.out.println(person);
 	}
-
 }
