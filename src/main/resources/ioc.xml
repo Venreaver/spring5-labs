@@ -9,6 +9,8 @@
     <bean id="person" class="lab.model.UsualPerson"
           p:name="John Smith"
           p:age="35"
+          p:height="1.78"
+          p:programmer="true"
           p:country-ref="country"
           p:contacts-ref="contacts"/>
 
