@@ -28,5 +28,7 @@
 
     <bean id="customer" class="lab.model.Customer" c:name="Homer" p:broke="false"/>
 
+    <bean id="brokenCustomer" class="lab.model.Customer" c:name="Bart" p:broke="true"/>
+
     <bean id="politeness" class="lab.aop.Politeness"/>
 </beans>

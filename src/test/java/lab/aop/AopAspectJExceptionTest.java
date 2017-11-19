@@ -20,13 +20,11 @@ public class AopAspectJExceptionTest {
     @Autowired
     private Bar bar;
     @Autowired
-    private Customer customer;
+    private Customer brokenCustomer;
 
     @Test
     public void testAfterThrowingAdvice() {
-        customer.setBroke(true);
-        assertThrows(CustomerBrokenException.class, () -> bar.sellSquishee(customer));
-        customer.setBroke(false);
+        assertThrows(CustomerBrokenException.class, () -> bar.sellSquishee(brokenCustomer));
         assertThat(AopLog.getStringValue(), containsString("Hmmm..."));
     }
 }
