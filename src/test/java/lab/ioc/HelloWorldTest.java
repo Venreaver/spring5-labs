@@ -1,4 +1,4 @@
-package ioc;
+package lab.ioc;
 
 import lab.model.Country;
 import lab.model.Person;

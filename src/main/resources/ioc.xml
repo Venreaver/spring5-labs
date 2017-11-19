@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <import resource="application-context.xml"/>
@@ -23,4 +23,10 @@
           p:id="1"
           p:name="Russia"
           p:codeName="RU"/>
+
+    <bean id="bar" class="lab.model.ApuBar"/>
+
+    <bean id="customer" class="lab.model.Customer" c:name="Homer" p:broke="false"/>
+
+    <bean id="politeness" class="lab.aop.Politeness"/>
 </beans>

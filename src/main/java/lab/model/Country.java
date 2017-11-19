@@ -10,11 +10,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Country implements Serializable {
-
     private int id;
-
     private String name;
-
     private String codeName;
 
     public Country(String name, String codeName) {

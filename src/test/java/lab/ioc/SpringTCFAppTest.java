@@ -1,13 +1,14 @@
-package ioc;
+package lab.ioc;
 
 import lab.model.Person;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static ioc.HelloWorldTest.getExpectedPerson;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -19,6 +20,6 @@ class SpringTCFAppTest {
 
     @Test
     void testInitPerson() {
-        assertThat(person, is(getExpectedPerson()));
+        MatcherAssert.assertThat(person, Is.is(HelloWorldTest.getExpectedPerson()));
     }
 }
