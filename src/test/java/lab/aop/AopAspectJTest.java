@@ -1,69 +1,57 @@
 package lab.aop;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
-
-import lab.aop.AopLog;
 import lab.model.ApuBar;
 import lab.model.Bar;
 import lab.model.Customer;
-
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:application-context.xml")
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.StringContains.containsString;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration("classpath:ioc.xml")
 public class AopAspectJTest {
-
-	@Autowired
+    @Autowired
     private Bar bar;
-    
-	@Autowired
+    @Autowired
     private Customer customer;
 
     @BeforeEach
     public void setUp() throws Exception {
-    	
         bar.sellSquishee(customer);
     }
 
     @Test
     public void testBeforeAdvice() {
-        assertTrue("Before advice is not good enought...", AopLog.getStringValue().contains("Hello"));
-        assertTrue("Before advice is not good enought...", AopLog.getStringValue().contains("How are you doing?"));
-        System.out.println(AopLog.getStringValue());
+        assertThat(AopLog.getStringValue(), containsString("Hello"));
+        assertThat(AopLog.getStringValue(), containsString("How are you doing?"));
     }
 
     @Test
     public void testAfterAdvice() {
-        System.out.println(AopLog.getStringValue());
-        assertTrue("After advice is not good enought...", AopLog.getStringValue().contains("Good Bye!"));
+        assertThat(AopLog.getStringValue(), containsString("Good Bye!"));
     }
 
     @Test
     public void testAfterReturningAdvice() {
-        assertTrue("Customer is broken", AopLog.getStringValue().contains("Good Enough?"));
-        System.out.println(AopLog.getStringValue());
+        assertThat(AopLog.getStringValue(), containsString("Good Enough?"));
     }
 
     @Test
     public void testAroundAdvice() {
-        assertTrue("Around advice is not good enought...", AopLog.getStringValue().contains("Hi!"));
-        assertTrue("Around advice is not good enought...", AopLog.getStringValue().contains("See you!"));
-        System.out.println(AopLog.getStringValue());
+        assertThat(AopLog.getStringValue(), containsString("Hi!"));
+        assertThat(AopLog.getStringValue(), containsString("See you!"));
     }
 
     @Test
     public void testAllAdvices() {
-        assertFalse("barObject instanceof ApuBar", bar instanceof ApuBar);
+        assertThat(bar.getClass(), not(instanceOf(ApuBar.class)));
     }
 }
